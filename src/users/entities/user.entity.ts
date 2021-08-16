@@ -13,20 +13,20 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   nombres: string;
 
-  @Column()
+  @Column({ nullable: false })
   apellidos: string;
 
-  @Column()
+  @Column({ nullable: false })
   email: string;
 
-  @Column()
+  @Column({ nullable: false })
   phoneNumber: string;
 
   @Exclude()
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
   @Column({ default: 'customer' })

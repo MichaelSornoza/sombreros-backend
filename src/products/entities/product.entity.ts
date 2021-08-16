@@ -5,13 +5,13 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   stock: Number;
 
-  @Column()
+  @Column({ nullable: false })
   price: string;
 
   @Column()
