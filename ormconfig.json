@@ -1,10 +1,15 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "ec2-54-156-60-12.compute-1.amazonaws.com",
   "port": 5432,
-  "username": "postgres",
-  "password": "12345",
-  "database": "sombreros",
+  "username": "camrqlviauyvxt",
+  "password": "71adf606024e10f364eb23cd4b68247a51a7b75bfd5f3fc1538bcd7a15cc22ef",
+  "database": "d2o950c4n6dp8t",
   "entities": ["dist/**/*.entity{.ts,.js}"],
-  "synchronize": true
+  "synchronize": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  }
 }
