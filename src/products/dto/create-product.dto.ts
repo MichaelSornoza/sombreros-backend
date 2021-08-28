@@ -5,7 +5,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   readonly name: string;
 
-  @IsNumber()
+  @IsString()
   readonly stock: string;
 
   @IsString()

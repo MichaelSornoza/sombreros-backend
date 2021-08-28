@@ -35,44 +35,42 @@ export class ProductsService {
     return products;
   }
 
-  async buyOne(id: number, mount: number) {
-    const product = await this.productsRepository.findOne(id);
+  // async buyOne(id: number, mount: number) {
+  //   const product = await this.productsRepository.findOne(id);
 
-    if (!product) {
-      throw new BadRequestException(
-        'Error, no existe el producto que quieres comprar',
-      );
-    }
+  //   if (!product) {
+  //     throw new BadRequestException(
+  //       'Error, no existe el producto que quieres comprar',
+  //     );
+  //   }
 
-    if (product.stock === 0) {
-      throw new NotFoundException('Error, no hay stock del producto');
-    }
+  //   if (!updatedProduct) {
+  //     throw new BadRequestException('Error, al actualizar el producto');
+  //   }
 
-    let stockNumber = product.stock as number;
-
-    stockNumber -= mount;
-
-    const newProduct = product;
-    newProduct.stock = stockNumber;
-
-    const updatedProduct = await this.productsRepository.update(id, newProduct);
-
-    if (!updatedProduct) {
-      throw new BadRequestException('Error, al actualizar el producto');
-    }
-
-    return updatedProduct;
-  }
+  //   return updatedProduct;
+  // }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} product`;
   // }
 
-  // update(id: number, updateProductDto: UpdateProductDto) {
-  //   return `This action updates a #${id} product`;
-  // }
+  async update(id: number, updateProductDto: UpdateProductDto) {
+    const product = await this.productsRepository.update(id, updateProductDto);
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} product`;
-  // }
+    if (!product) {
+      throw new BadRequestException('Error al actualizar el producto');
+    }
+
+    return product;
+  }
+
+  async remove(id: number) {
+    const removed = await this.productsRepository.delete(id);
+
+    if (!removed) {
+      throw new BadRequestException('Error al eliminar el producto');
+    }
+    return removed;
+  }
 }

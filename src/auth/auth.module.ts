@@ -19,7 +19,7 @@ import { JWTStrategy } from './strategies/jwt.strategy';
     JwtModule.register({
       secret: SECRET,
       signOptions: {
-        expiresIn: '30 days',
+        expiresIn: '30d',
       },
     }),
   ],
