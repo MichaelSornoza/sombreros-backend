@@ -13,8 +13,18 @@ import { ProductsModule } from './products/products.module';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      useFactory: async () =>
-        Object.assign(await getConnectionOptions(), { autoLoadEntities: true }),
+      useFactory: async () => {
+        return {
+          type: 'postgres',
+          url: process.env.DATABASE_URL,
+          synchronize: false,
+          autoLoadEntities: true,
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        };
+        // Object.assign(await getConnectionOptions(), { autoLoadEntities: true }),
+      },
     }),
     AuthModule,
     UsersModule,
