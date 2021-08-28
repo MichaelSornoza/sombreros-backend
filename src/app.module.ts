@@ -3,8 +3,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, getConnectionOptions } from 'typeorm';
 
-import { ConfigModule } from '@nestjs/config';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -14,22 +12,9 @@ import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
     TypeOrmModule.forRootAsync({
-      useFactory: async () => {
-        return {
-          type: 'postgres',
-          url: process.env.DATABASE_URL,
-          synchronize: false,
-          autoLoadEntities: true,
-          ssl: {
-            rejectUnauthorized: false,
-          },
-        };
-        // Object.assign(await getConnectionOptions(), { autoLoadEntities: true }),
-      },
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), { autoLoadEntities: true }),
     }),
     AuthModule,
     UsersModule,
